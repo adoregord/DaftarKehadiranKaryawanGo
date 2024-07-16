@@ -5,16 +5,12 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	"main.go/model"
 )
 
-type Karyawan struct {
-	ID         int
-	Nama       string
-	Kehardiran bool
-}
-
 // function to add karyawan list
-func add(list *[]Karyawan, nama string) {
+func add(list *[]model.Karyawan, nama string) {
 	var ID int
 	length := len(*list)
 	if length == 0 {
@@ -24,7 +20,7 @@ func add(list *[]Karyawan, nama string) {
 	}
 
 	*list = append(
-		*list, Karyawan{
+		*list, model.Karyawan{
 			ID:         ID,
 			Nama:       nama,
 			Kehardiran: false,
@@ -32,7 +28,7 @@ func add(list *[]Karyawan, nama string) {
 }
 
 // function to change status of karyawan to true
-func changeStatus(list *[]Karyawan, ID int) {
+func changeStatus(list *[]model.Karyawan, ID int) {
 	for index, isi := range *list {
 		if isi.ID == ID {
 			(*list)[index].Kehardiran = true
@@ -43,7 +39,7 @@ func changeStatus(list *[]Karyawan, ID int) {
 }
 
 // function to chnage the status back to false
-func revertStatus(list *[]Karyawan, ID int) {
+func revertStatus(list *[]model.Karyawan, ID int) {
 	for index, isi := range *list {
 		if isi.ID == ID {
 			(*list)[index].Kehardiran = false
@@ -54,7 +50,7 @@ func revertStatus(list *[]Karyawan, ID int) {
 }
 
 // function to delete karyawan from list
-func deleteKaryawan(list *[]Karyawan, ID int) {
+func deleteKaryawan(list *[]model.Karyawan, ID int) {
 	for index, value := range *list {
 		if value.ID == ID {
 			*list = append((*list)[:index], (*list)[index+1:]...)
@@ -69,7 +65,7 @@ func deleteKaryawan(list *[]Karyawan, ID int) {
 }
 
 // function to show the list of karyawan
-func showKaryawan(list []Karyawan) {
+func showKaryawan(list []model.Karyawan) {
 	fmt.Println("--------------DAFTAR KARYAWAN--------------")
 	fmt.Printf("ID \t Nama \t\t\t Kehadiran \n")
 	if len(list) == 0 {
@@ -82,7 +78,7 @@ func showKaryawan(list []Karyawan) {
 	fmt.Println()
 }
 
-func findById(list []Karyawan, id int, karyawan *Karyawan) {
+func findById(list []model.Karyawan, id int, karyawan *model.Karyawan) {
 	for _, value := range list {
 		if(value.ID ==  id){
 			*karyawan = value
@@ -91,7 +87,7 @@ func findById(list []Karyawan, id int, karyawan *Karyawan) {
 }
 
 func main() {
-	var list []Karyawan
+	var list []model.Karyawan
 
 	Scanner := bufio.NewScanner(os.Stdin)
 
@@ -156,7 +152,7 @@ func main() {
 			fmt.Print("Employee ID you want to find by id :")
 			Scanner.Scan()
 			idStr := Scanner.Text()
-			var karyawan Karyawan
+			var karyawan model.Karyawan
 			id, err := strconv.Atoi(idStr)
 			if err != nil {
 				fmt.Printf("ERROR COK\n\n")
