@@ -124,7 +124,7 @@ func main() {
 			idStr := Scanner.Text()
 			id, err := strconv.Atoi(idStr)
 			if err != nil {
-				fmt.Printf("ERROR COK\n\n")
+				fmt.Printf("ERROR\n\n")
 				continue
 			}
 			changeStatus(&list, id)
@@ -134,7 +134,7 @@ func main() {
 			idStr := Scanner.Text()
 			id, err := strconv.Atoi(idStr)
 			if err != nil {
-				fmt.Printf("ERROR COK\n\n")
+				fmt.Printf("ERROR\n\n")
 				continue
 			}
 			revertStatus(&list, id)
@@ -144,7 +144,7 @@ func main() {
 			idStr := Scanner.Text()
 			id, err := strconv.Atoi(idStr)
 			if err != nil {
-				fmt.Printf("ERROR COK\n\n")
+				fmt.Printf("ERROR\n\n")
 				continue
 			}
 			deleteKaryawan(&list, id)
@@ -155,7 +155,7 @@ func main() {
 			var karyawan model.Karyawan
 			id, err := strconv.Atoi(idStr)
 			if err != nil {
-				fmt.Printf("ERROR COK\n\n")
+				fmt.Printf("ERROR\n\n")
 				continue
 			}
 			findById(list, id, &karyawan)
@@ -165,7 +165,7 @@ func main() {
 		case 7: // break from the for loop
 			return
 		default:
-			fmt.Printf("GABISA GITU COK\n\n")
+			fmt.Printf("Please pick a number from 1 to 7\n\n")
 			continue
 		}
 		fmt.Println()
