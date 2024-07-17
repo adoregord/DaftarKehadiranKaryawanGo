@@ -54,9 +54,9 @@ func deleteKaryawan(list *[]model.Karyawan, ID int) {
 	for index, value := range *list {
 		if value.ID == ID {
 			*list = append((*list)[:index], (*list)[index+1:]...)
-			for i := index; i < len(*list); i++ {
-				(*list)[i].ID--
-			}
+			// for i := index; i < len(*list); i++ {
+			// 	(*list)[i].ID--
+			// }
 			return
 		}
 	}
@@ -65,26 +65,27 @@ func deleteKaryawan(list *[]model.Karyawan, ID int) {
 }
 
 // function to show the list of karyawan
-func showKaryawan(list []model.Karyawan) {
+func showKaryawan(list *[]model.Karyawan) {
 	fmt.Println("--------------DAFTAR KARYAWAN--------------")
 	fmt.Printf("ID \t Nama \t\t\t Kehadiran \n")
-	if len(list) == 0 {
+	if len(*list) == 0 {
 		fmt.Printf("~~~~~~No employee recorded~~~~~~\n\n")
 		return
 	}
-	for _, value := range list {
+	for _, value := range *list {
 		fmt.Printf("%d \t %s \t\t\t %t \n", value.ID, value.Nama, value.Kehardiran)
 	}
 	fmt.Println()
 }
 
-func findById(list []model.Karyawan, id int, karyawan *model.Karyawan) {
-	for _, value := range list {
-		if(value.ID ==  id){
-			*karyawan = value
-		}
-	}
-}
+// //coba coba
+// func findById(list []model.Karyawan, id int, karyawan *model.Karyawan) {
+// 	for _, value := range list {
+// 		if(value.ID ==  id){
+// 			*karyawan = value
+// 		}
+// 	}
+// }
 
 func main() {
 	var list []model.Karyawan
@@ -96,9 +97,9 @@ func main() {
 	fmt.Println("Input [2] to change the employee status to true")
 	fmt.Println("Input [3] to change the employee status to false")
 	fmt.Println("Input [4] to delete the emploee from the list")
-	fmt.Println("Input [5] to find by id")
-	fmt.Println("Input [6] to show all employee")
-	fmt.Println("Input [7] to close the app")
+	// fmt.Println("Input [5] to find by id")
+	fmt.Println("Input [5] to show all employee")
+	fmt.Println("Input [6] to close the app")
 
 	for {
 		// input for selecting the action
@@ -148,24 +149,24 @@ func main() {
 				continue
 			}
 			deleteKaryawan(&list, id)
-		case 5: // find by id
-			fmt.Print("Employee ID you want to find by id :")
-			Scanner.Scan()
-			idStr := Scanner.Text()
-			var karyawan model.Karyawan
-			id, err := strconv.Atoi(idStr)
-			if err != nil {
-				fmt.Printf("ERROR\n\n")
-				continue
-			}
-			findById(list, id, &karyawan)
-			fmt.Println(karyawan)
-		case 6: // show all karyawan list
-			showKaryawan(list)
-		case 7: // break from the for loop
+		// case 5: // find by id
+		// 	fmt.Print("Employee ID you want to find by id :")
+		// 	Scanner.Scan()
+		// 	idStr := Scanner.Text()
+		// 	var karyawan model.Karyawan
+		// 	id, err := strconv.Atoi(idStr)
+		// 	if err != nil {
+		// 		fmt.Printf("ERROR\n\n")
+		// 		continue
+		// 	}
+		// 	findById(list, id, &karyawan)
+		// 	fmt.Println(karyawan)
+		case 5: // show all karyawan list
+			showKaryawan(&list)
+		case 6: // break from the for loop
 			return
 		default:
-			fmt.Printf("Please pick a number from 1 to 7\n\n")
+			fmt.Printf("Please pick a number from 1 to 6\n\n")
 			continue
 		}
 		fmt.Println()
